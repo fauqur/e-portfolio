@@ -14,7 +14,7 @@ html {
   box-sizing: border-box;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3, h4, h5, h6, span {
   color: #242424;
   text-align: center;
   line-height: 1.25;
@@ -33,6 +33,11 @@ p {
 a {
   text-decoration: none;
   position: relative;
+  transition: opacity 300ms ease;
+}
+
+i:hover {
+  opacity: 0.7;
 }
 
 .link__hover-effect:after {
@@ -84,6 +89,7 @@ li {
   width: 100%;
   max-width: 800px;
   margin: 0 auto;
+  padding: 0 12px;
 }
 
 section:nth-child(even) {
@@ -168,11 +174,64 @@ font-weight: 600;
   overflow: hidden;
   box-shadow: 0px 0px 32px rgba(0, 0, 0, 0.363);
   margin-bottom: 16px;
+  animation: animate-profile-picture 800ms  200ms  backwards;
+}
+
+ .animated-shroom {
+  display: inline-block;
+  font-size: 3rem;
+  animation: shroom-bounce 2200ms infinite alternate ease-in-out;
+}
+
+@keyframes shroom-bounce {
+  0% {
+    transform: scale(.90) rotate(0) translateY(0);
+  }
+  15% {
+    transform: scale(1) rotate(-30deg);
+  }
+  30%{
+    transform: rotate(0deg);
+  }
+  45% {
+    transform: scale(1.1) rotate(30deg)  translateY(-15px);
+  }
+  60% {
+    transform: rotate(0deg)  ;
+  }
+75% {
+  transform: scale(1) rotate(-30deg) ;
+}
+  100% {
+    transform: scale(.9) rotate(0) translateY(0);
+  }
+}
+
+@keyframes animate-profile-picture {
+  4% {
+      transform: scale(0);
+  }
+  80% {
+    transform: scale(1.23);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 .about-me__img {
  width: 100%;
  align-self: center; 
+ animation: fade-in 1200ms 800ms backwards;
+}
+
+@keyframes  fade-in{
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 .about-me__image--container {
@@ -187,7 +246,25 @@ font-weight: 600;
   font-size: 20px;
   color:rgba(26, 12, 219, 0.747);
   padding: 8px 16px;
+  animation: fade-up 650ms 400ms backwards;
 }
+
+.about-me__links {
+  animation: fade-up 650ms 200ms backwards;
+}
+
+@keyframes fade-up {
+0% {
+  opacity: 0;
+  transform: translateY(40px);
+}
+100% {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+}
+
 .about-me__picture {
   width: 100%;
   transform: scale(1.5);
@@ -197,16 +274,19 @@ font-weight: 600;
  .about-me__info--para{
   font-size: 18px;
   margin-bottom: 28px;
+  animation: fade-up 650ms 300ms backwards;
  }
 
   .about-me__info--title{
   margin-bottom: 16px;
+  animation: fade-up 650ms 400ms backwards;
  }
 
  .about-me__icon-fiverr {
   width: 24px;
   height: 24px;
   padding-top: 4px;
+  animation: fade-up 650ms 200ms backwards;
  }
 
 /*TECH - STACK */
@@ -337,7 +417,6 @@ opacity: 0.7;
 .project__description--link {
 font-size: 20px;
 margin-right:  16px ;
-
 }
 
 .project__description--title, 
@@ -380,7 +459,8 @@ footer {
 
 .footer__social--link,
 .footer__copyright,
-.footer__logo--popper {
+.footer__logo--popper,
+.footer__logo--popper * {
   color: #fff;
 }
 
@@ -408,66 +488,14 @@ footer {
 .footer__copyright::before {
     content: "\00A9 ";
 }
-}
 
-/*ANIMATION*/
- .animated-shroom {
-  display: inline-block;
-  font-size: 3rem;
-  animation: bounce 3s infinite alternate ease-in-out;
-}
 
-@keyframes bounce {
-  0% {
-    transform: translateY(0);
-  }
-  100% {
-    transform: translateY(-15px);
-  }
-}
 
 /* MOBILE BROWSER */
 
-@media screen (max-width: 480px) {
+@media screen and (max-width: 1080px) {
   nav {
-    height: 48px;
-  }
-
-  h1 {
-    font-size: 12px;
-  }
-
-    .about-me__info--para {
-    font-size: 12px;
-  }
-
-  .language  {
-    width: calc(100%/2);
- 
-  } 
-}
-
-@media screen (max-width: 768px) {
-  nav {
-    height: 64px; 
-  }
-
-  h1 {
-    font-size: 28px;
-  }
-  .about-me__info--para {
-    font-size: 18px;
-  }
-
-  .language  {
-    width: calc(100%/3); 
-  } 
-
-}
-
-@media screen (max-width:1080px) {
-  nav {
-    height: 128px; 
+    height: 128px;
   }
 
   h1 {
@@ -475,3 +503,77 @@ footer {
   }
 }
 
+@media screen and (max-width: 768px) {
+  nav {
+    height: 64px;
+  }
+
+  h1 {
+    font-size: 28px;
+  }
+
+  .about-me__info--para {
+    font-size: 18px;
+  }
+
+  .language {
+    width: calc(100% / 3);
+  }
+
+  .project__description--para {
+    font-size: 14px;  
+  }
+
+  .project__description {
+    left: 30px;
+    padding-right: 30px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  nav {
+    height: 48px;
+  }
+
+  .nav__link:not(:last-child) {
+    display: none;
+  }
+
+.project__description {
+  padding: 0;
+  left: 0;
+  width: 100%;
+}
+
+  .project__description--para {
+    display: none;
+  }
+
+.project__description--links {
+  display: flex;
+  justify-content: center;  
+}
+
+.project__description--title {
+  line-height: 1;
+  font-size:  32px;
+  text-align: center;
+}
+
+.project__description--sub-title {
+  text-align: center;
+  margin: 0px 12px;
+}
+
+  h1 {
+    font-size: 24x;
+  }
+
+  .about-me__info--para {
+    font-size: 18px;
+  }
+
+  .language {
+    width: calc(100% / 2);
+  }
+}
